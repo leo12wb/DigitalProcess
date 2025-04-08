@@ -1,0 +1,54 @@
+@{
+    ViewData["Title"] = "Organizações";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Organizações</h2>
+
+<div id="app">
+    <div class="mb-3">
+        <input v-model="newOrg.name" class="form-control" placeholder="Nome da organização" />
+        <button @click="createOrg" class="btn btn-primary mt-2">Criar</button>
+    </div>
+
+    <ul class="list-group">
+        <li v-for="org in organizations" :key="org.id" class="list-group-item">
+            {{ org.name }}
+        </li>
+    </ul>
+</div>
+
+@section Scripts {
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    organizations: [],
+                    newOrg: { name: '' }
+                };
+            },
+            mounted() {
+                this.fetchOrgs();
+            },
+            methods: {
+                fetchOrgs() {
+                    fetch('/api/Organization')
+                        .then(res => res.json())
+                        .then(data => this.organizations = data);
+                },
+                createOrg() {
+                    fetch('/api/Organization', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(this.newOrg)
+                    }).then(() => {
+                        this.newOrg.name = '';
+                        this.fetchOrgs();
+                    });
+                }
+            }
+        }).mount('#app');
+    </script>
+}
