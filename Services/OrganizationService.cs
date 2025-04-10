@@ -1,17 +1,32 @@
+using DigitalProcess.Data;
 using DigitalProcess.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DigitalProcess.Services
 {
     public class OrganizationService
     {
-        private readonly List<Organization> _organizations = new();
+        private readonly AppDbContext _context;
 
-        public List<Organization> GetAll() => _organizations;
+        public OrganizationService(AppDbContext context)
+        {
+            _context = context;
+        }
 
-        public Organization GetById(int id) =>
-            _organizations.FirstOrDefault(o => o.Id == id);
+        public List<Organization> GetAll()
+        {
+            return _context.Organizations.ToList();
+        }
 
-        public void Add(Organization org) =>
-            _organizations.Add(org);
+        public Organization GetById(int id)
+        {
+            return _context.Organizations.FirstOrDefault(o => o.Id == id);
+        }
+
+        public void Add(Organization org)
+        {
+            _context.Organizations.Add(org);
+            _context.SaveChanges();
+        }
     }
 }

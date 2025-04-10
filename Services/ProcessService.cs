@@ -1,20 +1,45 @@
+using DigitalProcess.Data;
 using DigitalProcess.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DigitalProcess.Services
 {
     public class ProcessService
     {
-        private readonly List<Process> _processes = new();
+        private readonly AppDbContext _context;
 
-        public List<Process> GetAll() => _processes;
+        public ProcessService(AppDbContext context)
+        {
+            _context = context;
+        }
 
-        public Process GetById(int id) =>
-            _processes.FirstOrDefault(p => p.Id == id);
+        public List<Process> GetAll()
+        {
+            return _context.Processes
+                // .Include(p => p.ProcessType)
+                // .Include(p => p.OriginSector)
+                // .Include(p => p.DestinationSector)
+                // .Include(p => p.CreatorUser)
+                .ToList();
+        }
+
+        public Process GetById(int id)
+        {
+            return _context.Processes
+                // .Include(p => p.ProcessType)
+                // .Include(p => p.OriginSector)
+                // .Include(p => p.DestinationSector)
+                // .Include(p => p.CreatorUser)
+                .FirstOrDefault(p => p.Id == id);
+        }
 
         public void Add(Process process)
         {
             process.ProtocolNumber = GenerateProtocol();
-            _processes.Add(process);
+            process.CreatedAt = DateTime.Now;
+
+            _context.Processes.Add(process);
+            _context.SaveChanges();
         }
 
         private string GenerateProtocol()

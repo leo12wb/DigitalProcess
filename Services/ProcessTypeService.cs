@@ -1,17 +1,32 @@
+using DigitalProcess.Data;
 using DigitalProcess.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DigitalProcess.Services
 {
     public class ProcessTypeService
     {
-        private readonly List<ProcessType> _types = new();
+        private readonly AppDbContext _context;
 
-        public List<ProcessType> GetAll() => _types;
+        public ProcessTypeService(AppDbContext context)
+        {
+            _context = context;
+        }
 
-        public ProcessType GetById(int id) =>
-            _types.FirstOrDefault(t => t.Id == id);
+        public List<ProcessType> GetAll()
+        {
+            return _context.ProcessTypes.ToList();
+        }
 
-        public void Add(ProcessType type) =>
-            _types.Add(type);
+        public ProcessType GetById(int id)
+        {
+            return _context.ProcessTypes.FirstOrDefault(t => t.Id == id);
+        }
+
+        public void Add(ProcessType type)
+        {
+            _context.ProcessTypes.Add(type);
+            _context.SaveChanges();
+        }
     }
 }

@@ -2,15 +2,16 @@ using Microsoft.AspNetCore.Mvc;
 using DigitalProcess.Models;
 using DigitalProcess.Services;
 
-namespace DigitalProcess.Controllers
+namespace DigitalProcess.Controllers.Api
 {
     [ApiController]
-    [Route("api/[controller]")]
-    public class OrganizationController : ControllerBase
+    [Route("api/organization")]
+    // [Route("api/[controller]")]
+    public class OrganizationApiController : ControllerBase
     {
         private readonly OrganizationService _service;
 
-        public OrganizationController(OrganizationService service)
+        public OrganizationApiController(OrganizationService service)
         {
             _service = service;
         }
