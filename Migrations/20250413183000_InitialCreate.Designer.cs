@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DigitalProcess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250410171610_InitialCreate")]
+    [Migration("20250413183000_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -38,7 +38,7 @@ namespace DigitalProcess.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("ProcessId")
+                    b.Property<int?>("ProcessId")
                         .HasColumnType("int");
 
                     b.Property<int>("Type")
@@ -88,7 +88,6 @@ namespace DigitalProcess.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ProtocolNumber")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int>("TypeId")
@@ -175,7 +174,7 @@ namespace DigitalProcess.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("OrganizationId")
+                    b.Property<int?>("OrganizationId")
                         .HasColumnType("int");
 
                     b.Property<int?>("ParentSectorId")
@@ -231,13 +230,9 @@ namespace DigitalProcess.Migrations
 
             modelBuilder.Entity("DigitalProcess.Models.Document", b =>
                 {
-                    b.HasOne("DigitalProcess.Models.Process", "Process")
+                    b.HasOne("DigitalProcess.Models.Process", null)
                         .WithMany("Documents")
-                        .HasForeignKey("ProcessId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Process");
+                        .HasForeignKey("ProcessId");
                 });
 
             modelBuilder.Entity("DigitalProcess.Models.Process", b =>
@@ -313,9 +308,7 @@ namespace DigitalProcess.Migrations
                 {
                     b.HasOne("DigitalProcess.Models.Organization", "Organization")
                         .WithMany("Sectors")
-                        .HasForeignKey("OrganizationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OrganizationId");
 
                     b.HasOne("DigitalProcess.Models.Sector", "ParentSector")
                         .WithMany("Children")

@@ -19,7 +19,7 @@ namespace DigitalProcess.Models
         // Para documentos internos
         public string? Content { get; set; }
 
-        public int ProcessId { get; set; }
-        public Process Process { get; set; }
+        // public int ProcessId { get; set; }
+        // public Process Process { get; set; }
     }
 }

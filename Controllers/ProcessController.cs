@@ -1,28 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
-using DigitalProcess.Models;
-using DigitalProcess.Services;
-
-namespace DigitalProcess.Controllers
+public class ProcessController : Controller
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ProcessController : ControllerBase
+    public IActionResult Index()
     {
-        private readonly ProcessService _service;
+        return View(); // isso renderiza Views/Process/Index.cshtml
+    }
 
-        public ProcessController(ProcessService service)
-        {
-            _service = service;
-        }
-
-        [HttpGet]
-        public IActionResult GetAll() => Ok(_service.GetAll());
-
-        [HttpPost]
-        public IActionResult Create(Process process)
-        {
-            _service.Add(process);
-            return Ok(process);
-        }
+    public IActionResult Create()
+    {
+        return View(); // isso renderiza Views/Process/Create.cshtml (form)
     }
 }

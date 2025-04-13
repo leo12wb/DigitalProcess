@@ -38,7 +38,7 @@ namespace DigitalProcess.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    OrganizationId = table.Column<int>(type: "int", nullable: false),
+                    OrganizationId = table.Column<int>(type: "int", nullable: true),
                     ParentSectorId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -48,8 +48,7 @@ namespace DigitalProcess.Migrations
                         name: "FK_Sectors_Organizations_OrganizationId",
                         column: x => x.OrganizationId,
                         principalTable: "Organizations",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Sectors_Sectors_ParentSectorId",
                         column: x => x.ParentSectorId,
@@ -119,7 +118,7 @@ namespace DigitalProcess.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Content = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ProcessId = table.Column<int>(type: "int", nullable: false)
+                    ProcessId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -156,7 +155,7 @@ namespace DigitalProcess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ProtocolNumber = table.Column<string>(type: "longtext", nullable: false)
+                    ProtocolNumber = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     TypeId = table.Column<int>(type: "int", nullable: false),
                     OriginOrganizationId = table.Column<int>(type: "int", nullable: true),
@@ -307,8 +306,7 @@ namespace DigitalProcess.Migrations
                 table: "Documents",
                 column: "ProcessId",
                 principalTable: "Processes",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                principalColumn: "Id");
         }
 
         /// <inheritdoc />

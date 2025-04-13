@@ -42,6 +42,18 @@ namespace DigitalProcess.Services
             _context.SaveChanges();
         }
 
+        public void Update(Process process)
+        {
+            _context.Processes.Update(process);
+            _context.SaveChanges();
+        }
+
+        public void Delete(Process process)
+        {
+            _context.Processes.Remove(process);
+            _context.SaveChanges();
+        }
+
         private string GenerateProtocol()
         {
             var random = new Random();
