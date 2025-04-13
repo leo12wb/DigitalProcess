@@ -1,6 +1,5 @@
 using DigitalProcess.Data;
 using DigitalProcess.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace DigitalProcess.Services
 {
@@ -26,6 +25,18 @@ namespace DigitalProcess.Services
         public void Add(Organization org)
         {
             _context.Organizations.Add(org);
+            _context.SaveChanges();
+        }
+
+        public void Update(Organization org)
+        {
+            _context.Organizations.Update(org);
+            _context.SaveChanges();
+        }
+
+        public void Delete(Organization org)
+        {
+            _context.Organizations.Remove(org);
             _context.SaveChanges();
         }
     }
