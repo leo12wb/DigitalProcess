@@ -1,6 +1,5 @@
 using DigitalProcess.Data;
 using DigitalProcess.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace DigitalProcess.Services
 {
@@ -26,6 +25,17 @@ namespace DigitalProcess.Services
         public void Add(Sector sector)
         {
             _context.Sectors.Add(sector);
+            _context.SaveChanges();
+        }
+        public void Update(Sector sector)
+        {
+            _context.Sectors.Update(sector);
+            _context.SaveChanges();
+        }
+
+        public void Delete(Sector sector)
+        {
+            _context.Sectors.Remove(sector);
             _context.SaveChanges();
         }
     }

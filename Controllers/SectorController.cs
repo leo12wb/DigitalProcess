@@ -1,28 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
-using DigitalProcess.Models;
-using DigitalProcess.Services;
-
-namespace DigitalProcess.Controllers
+public class SectorController : Controller
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class SectorController : ControllerBase
+    public IActionResult Index()
     {
-        private readonly SectorService _service;
+        return View(); // isso renderiza Views/Sector/Index.cshtml
+    }
 
-        public SectorController(SectorService service)
-        {
-            _service = service;
-        }
-
-        [HttpGet]
-        public IActionResult GetAll() => Ok(_service.GetAll());
-
-        [HttpPost]
-        public IActionResult Create(Sector sector)
-        {
-            _service.Add(sector);
-            return Ok();
-        }
+    public IActionResult Create()
+    {
+        return View(); // isso renderiza Views/Sector/Create.cshtml (form)
     }
 }
