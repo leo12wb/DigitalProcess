@@ -5,12 +5,12 @@ using DigitalProcess.Services;
 namespace DigitalProcess.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
-    public class ProcessMovementController : ControllerBase
+    [Route("api/processMovement")]
+    public class ProcessMovementApiController : ControllerBase
     {
         private readonly ProcessMovementService _service;
 
-        public ProcessMovementController(ProcessMovementService service)
+        public ProcessMovementApiController(ProcessMovementService service)
         {
             _service = service;
         }

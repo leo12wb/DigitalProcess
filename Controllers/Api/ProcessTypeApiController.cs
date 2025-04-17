@@ -5,12 +5,12 @@ using DigitalProcess.Services;
 namespace DigitalProcess.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
-    public class ProcessTypeController : ControllerBase
+    [Route("api/processType")]
+    public class ProcessTypeApiController : ControllerBase
     {
         private readonly ProcessTypeService _service;
 
-        public ProcessTypeController(ProcessTypeService service)
+        public ProcessTypeApiController(ProcessTypeService service)
         {
             _service = service;
         }

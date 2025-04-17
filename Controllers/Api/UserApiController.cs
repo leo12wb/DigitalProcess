@@ -5,12 +5,12 @@ using DigitalProcess.Services;
 namespace DigitalProcess.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
-    public class UserController : ControllerBase
+    [Route("api/user")]
+    public class UserApiController : ControllerBase
     {
         private readonly UserService _service;
 
-        public UserController(UserService service)
+        public UserApiController(UserService service)
         {
             _service = service;
         }

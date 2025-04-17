@@ -5,12 +5,12 @@ using DigitalProcess.Services;
 namespace DigitalProcess.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
-    public class DocumentController : ControllerBase
+    [Route("api/document")]
+    public class DocumentApiController : ControllerBase
     {
         private readonly DocumentService _service;
 
-        public DocumentController(DocumentService service)
+        public DocumentApiController(DocumentService service)
         {
             _service = service;
         }
