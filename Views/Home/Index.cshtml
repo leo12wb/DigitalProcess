@@ -1,8 +1,86 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div >
+    @* <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p> *@
+    
+    <h4 style="text-align: center;">Bem-vindo ao Sistema Eletrônico de Informações de Cardoso Moreira </h4>
+    <p style="text-align: center;color: #9d9f9f;">Acesse nossos serviços abaixo</p>
+ 
+    <div>
+      <label style="padding-bottom: 10px;color: #9d9f9f;font-size: 14px;">Público em geral</label>
+      <div class="row g-3">
+        <div class="col-6 col-md-3">
+            <div class="card text-center p-3">
+            <div class="card-icon mb-2"><i class="bi bi-people-fill"></i></div>
+            <div class="card-body p-0">
+                <p class="card-text">Login Cidadão</p>
+            </div>
+            </div>
+        </div>
+
+        <div class="col-6 col-md-3">
+            <div class="card text-center p-3">
+            <div class="card-icon mb-2"><i class="bi bi-search"></i></div>
+            <div class="card-body p-0">
+                <p class="card-text">Consultar Processos</p>
+            </div>
+            </div>
+        </div>
+
+        <div class="col-6 col-md-3">
+            <div class="card text-center p-3">
+            <div class="card-icon mb-2"><i class="bi bi-journal-text"></i></div>
+            <div class="card-body p-0">
+                <p class="card-text">Criar Processo</p>
+            </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 20px;">
+      <label style="padding-bottom: 10px;color: #9d9f9f;font-size: 14px;">Servidores públicos</label>
+      <div class="row g-3">
+        <div class="col-6 col-md-3">
+            <div class="card text-center p-3">
+            <div class="card-icon mb-2"><i class="bi bi-search"></i></div>
+            <div class="card-body p-0">
+                <p class="card-text">Consultar Processos</p>
+            </div>
+            </div>
+        </div>
+
+        <div class="col-6 col-md-3">
+            <a  asp-area="" asp-controller="Process" asp-action="Index">
+            <div class="card text-center p-3">
+            <div class="card-icon mb-2"><i class="bi bi-journal-text"></i></div>
+            <div class="card-body p-0">
+                <p class="card-text">Processos</p>
+            </div>
+            </div>
+            </a>
+        </div>
+
+        <div class="col-6 col-md-3">
+            <div class="card text-center p-3">
+            <div class="card-icon mb-2"><i class="bi bi-receipt-cutoff"></i></div>
+            <div class="card-body p-0">
+                <p class="card-text"> lorem ipsum</p>
+            </div>
+            </div>
+        </div>
+
+        <div class="col-6 col-md-3">
+            <div class="card text-center p-3">
+            <div class="card-icon mb-2"><i class="bi bi-people-fill"></i></div>
+            <div class="card-body p-0">
+                <p class="card-text">Usuarios</p>
+            </div>
+            </div>
+        </div>
+      </div>
+    </div>
 </div>

@@ -16,7 +16,7 @@ namespace DigitalProcess.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.2")
+                .HasAnnotation("ProductVersion", "8.0.14")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("DigitalProcess.Models.Document", b =>
@@ -69,6 +69,16 @@ namespace DigitalProcess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("AccessLevel")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("ClosingDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("CompletionDeadline")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
@@ -87,7 +97,14 @@ namespace DigitalProcess.Migrations
                     b.Property<string>("ProtocolNumber")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("TypeId")
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("TypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserCreateId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -101,6 +118,8 @@ namespace DigitalProcess.Migrations
                     b.HasIndex("OriginSectorId");
 
                     b.HasIndex("TypeId");
+
+                    b.HasIndex("UserCreateId");
 
                     b.ToTable("Processes");
                 });
@@ -252,9 +271,11 @@ namespace DigitalProcess.Migrations
 
                     b.HasOne("DigitalProcess.Models.ProcessType", "Type")
                         .WithMany()
-                        .HasForeignKey("TypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TypeId");
+
+                    b.HasOne("DigitalProcess.Models.User", "UserCreate")
+                        .WithMany()
+                        .HasForeignKey("UserCreateId");
 
                     b.Navigation("CurrentOrganization");
 
@@ -265,6 +286,8 @@ namespace DigitalProcess.Migrations
                     b.Navigation("OriginSector");
 
                     b.Navigation("Type");
+
+                    b.Navigation("UserCreate");
                 });
 
             modelBuilder.Entity("DigitalProcess.Models.ProcessMovement", b =>

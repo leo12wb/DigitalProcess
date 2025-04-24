@@ -8,8 +8,8 @@ namespace DigitalProcess.Models
         // Número de protocolo gerado para o processo (ex: 202404130001)
         public string? ProtocolNumber { get; set; }
 
-        // Chave estrangeira indicando o tipo de processo (ex: "Solicitação", "Reclamação", "Projeto")
-        public int TypeId { get; set; }
+        // Chave estrangeira indicando o tipo de processo (ex: "Solicitação", "Reclamação", "Projeto", "Oficio")
+        public int? TypeId { get; set; }
 
         // Objeto de navegação para acessar os dados do tipo do processo
         public ProcessType? Type { get; set; }
@@ -37,6 +37,20 @@ namespace DigitalProcess.Models
 
         // Objeto de navegação para acessar o setor atual
         public Sector? CurrentSector { get; set; }
+
+        public int? UserCreateId { get; set; }
+        public User? UserCreate { get; set; }
+        
+        //Prazo de Conclusao
+        public DateTime? CompletionDeadline { get; set; }
+
+        // Data de Encerramento
+        public DateTime? ClosingDate { get; set; }
+
+        // Nivel de Acesso
+        public required string AccessLevel { get; set; } // Ex: "Público", "Restrito", "Sigiloso"
+
+        public required string Status { get; set; }
 
         // Data de criação do processo. Definida automaticamente com a data/hora atual (UTC).
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

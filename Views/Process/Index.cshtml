@@ -1,0 +1,74 @@
+@{
+    ViewData["Title"] = "Processos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Processos</h2>
+
+<div id="app">
+    <div class="mb-3">
+        <input v-model="newP.protocolNumber" class="form-control" placeholder="Numero do Processo" />
+        @* <button @click="createOrg" class="btn btn-primary mt-2">Criar</button> *@
+    </div>
+
+    <div class="table-responsive"></div>
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Numero do Processo</th>
+          <th>Tipo</th>
+          <th>Nivel de Acesso</th>
+          <th>status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item in process" :key="item.id">
+          <td>{{ item.protocolNumber }}</td>
+          <td> Oficio </td>
+          <td>{{ item.accessLevel }}</td>
+          <td>{{ item.status }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    @* <ul class="list-group">
+        <li v-for="item in process" :key="item.id" class="list-group-item">
+            {{ item.protocolNumber }}
+        </li>
+    </ul> *@
+</div>
+
+@section Scripts {
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    process: [],
+                    newP: { protocolNumber: '' }
+                };
+            },
+            mounted() {
+                this.fetchOrgs();
+            },
+            methods: {
+                fetchOrgs() {
+                    fetch('/api/Process')
+                        .then(res => res.json())
+                        .then(data => this.process = data.items);
+                },
+                createOrg() {
+                    fetch('/api/Process', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(this.newP)
+                    }).then(() => {
+                        this.newP.name = '';
+                        this.fetchOrgs();
+                    });
+                }
+            }
+        }).mount('#app');
+    </script>
+}
